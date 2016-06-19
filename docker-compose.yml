@@ -1,0 +1,19 @@
+db:
+  image: postgres:9.5
+  environment:
+    - POSTGRES_USER=airflow
+    - POSTGRES_PASSWORD=airflow
+    - POSTGRES_DB=airflow
+  ports:
+    - 5432:5432
+
+app:
+  build: .
+  volumes:
+    - ./:/usr/src/app
+  links:
+    - db:db
+  environment:
+    - AIRFLOW__CORE__SQL_ALCHEMY_CONN=postgresql+psycopg2://airflow:airflow@db/airflow
+  ports:
+    - 9000:80
