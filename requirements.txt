@@ -1,1 +1,0 @@
-airflow[celery,postgres,hive]==1.7.1.3
